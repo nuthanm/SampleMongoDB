@@ -69,10 +69,23 @@ namespace MongoApp
         {
             var collection = _db.GetCollection<T>(table);
 
-            var result = collection.ReplaceOne(
+            collection.ReplaceOne(
                 new BsonDocument("_id", id),
                 record,
                 new ReplaceOptions { IsUpsert = true });
+        }
+
+        /// <summary>
+        /// Delete the record based on Id from a collection.
+        /// </summary>
+        /// <typeparam name="T">T</typeparam>
+        /// <param name="table">table</param>
+        /// <param name="id">id</param>
+        public void DeleteRecord<T>(string table, Guid id)
+        {
+            var collection = _db.GetCollection<T>(table);
+            var filter = Builders<T>.Filter.Eq("Id", id);
+            collection.DeleteOne(filter);
         }
     }
 }

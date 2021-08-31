@@ -32,27 +32,30 @@ namespace MongoApp
             //};
 
             //db.InsertRecord<UserDetails>("horoscope", userWithHoroscope);
-            var newUserId = Guid.NewGuid();
-            var updateUser = new UserDetails
-            {
-                Id = newUserId,
-                GroomName = "Rajesh",
-                BrideName = "Dharani",
-                BrideDOB = "1992-11-09",
-                GroomDOB = "1987-10-29",
-                BridePlaceOfBirth = "Ananthapuram",
-                GroomPlaceOfBirth = "Piler",
-                BrideTime = "3:30 PM",
-                GroomTime = "5:00 PM",
-                horoscope = new HoroscopeDetails()
-                {
-                    MatchCount = 25,
-                    MatchStatus = "Good",
-                    Reason = "Mutual aggree.",
-                }
-            };
+            //// var newUserId = Guid.NewGuid();
+            // var updateUser = new UserDetails
+            // {
+            //     Id = newUserId,
+            //     GroomName = "Rajesh",
+            //     BrideName = "Dharani",
+            //     BrideDOB = "1992-11-09",
+            //     GroomDOB = "1987-10-29",
+            //     BridePlaceOfBirth = "Ananthapuram",
+            //     GroomPlaceOfBirth = "Piler",
+            //     BrideTime = "3:30 PM",
+            //     GroomTime = "5:00 PM",
+            //     horoscope = new HoroscopeDetails()
+            //     {
+            //         MatchCount = 25,
+            //         MatchStatus = "Good",
+            //         Reason = "Mutual aggree.",
+            //     }
+            // };
 
-           db.UpdateRecord<UserDetails>("horoscope", newUserId, updateUser);
+            //db.UpdateRecord<UserDetails>("horoscope", newUserId, updateUser);
+
+            // Delete the record
+            // db.DeleteRecord<UserDetails>("horoscope", new Guid("1cf60e95-20aa-40cf-a0b2-0722cd42884b"));
 
             var userDetails = db.LoadRecords<UserDetails>("horoscope");
             foreach (var user in userDetails)
@@ -61,8 +64,13 @@ namespace MongoApp
             }
 
             // var userRec = db.LoadRecordById<UserDetails>("horoscope", new Guid("1cf60e95-20aa-40cf-a0b2-0722cd42884b"));
-            var userRec = db.LoadRecordById<UserDetails>("horoscope", new Guid("fa96d4cc-99b0-49f6-a6ca-33454cdeaec1"));
+            var userRec = db.LoadRecordById<UserDetails>("horoscope", new Guid("317565d8-a055-4348-a05c-00e5836b8b9b"));
+            userRec.BrideName = "Sobha";
+            userRec.GroomName = "Nuthan";
+            db.UpdateRecord<UserDetails>("horoscope", new Guid("317565d8-a055-4348-a05c-00e5836b8b9b"), userRec);
+
             Console.WriteLine($"Horoscope status: {userRec?.horoscope?.MatchStatus} and reason: {userRec?.horoscope?.Reason}");
+            
             Console.ReadKey();
         }
     }
