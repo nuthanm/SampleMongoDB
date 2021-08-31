@@ -20,9 +20,9 @@ namespace MongoApp
         /// <summary>
         /// Generic insert method allows any object
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="table"></param>
-        /// <param name="record"></param>
+        /// <typeparam name="T">T</typeparam>
+        /// <param name="table">table</param>
+        /// <param name="record">records</param>
         public void InsertRecord<T>(string table, T record)
         {
             var collection = _db.GetCollection<T>(table);
@@ -33,9 +33,9 @@ namespace MongoApp
         /// To fetch all the records from the table/collections.
         /// Its good when you have a smaller number of records/documents.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="table"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">T</typeparam>
+        /// <param name="table">table</param>
+        /// <returns>All documents from a collection.</returns>
         public List<T> LoadRecords<T>(string table)
         {
             var collection = _db.GetCollection<T>(table);
@@ -45,10 +45,10 @@ namespace MongoApp
         /// <summary>
         /// Get a record from a collection based on id.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="table"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">T</typeparam>
+        /// <param name="table">table</param>
+        /// <param name="id">id</param>
+        /// <returns>Returns a single document from a collection based on Id.</returns>
         public T LoadRecordById<T>(string table, Guid id)
         {
             var collection = _db.GetCollection<T>(table);
