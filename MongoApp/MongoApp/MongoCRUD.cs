@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 
 namespace MongoApp
@@ -16,6 +17,12 @@ namespace MongoApp
             _db = client.GetDatabase(databaseName);
         }
 
+        /// <summary>
+        /// Generic insert method allows any object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="table"></param>
+        /// <param name="record"></param>
         public void InsertRecord<T>(string table, T record)
         {
             var collection = _db.GetCollection<T>(table);
@@ -33,6 +40,20 @@ namespace MongoApp
         {
             var collection = _db.GetCollection<T>(table);
             return collection.Find(new BsonDocument()).ToList();
+        }
+
+        /// <summary>
+        /// Get a record from a collection based on id.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="table"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public T LoadRecordById<T>(string table, Guid id)
+        {
+            var collection = _db.GetCollection<T>(table);
+            var filter = Builders<T>.Filter.Eq("Id", id);
+            return collection.Find(filter).FirstOrDefault();
         }
     }
 }

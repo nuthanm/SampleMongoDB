@@ -34,10 +34,14 @@ namespace MongoApp
             //db.InsertRecord<UserDetails>("horoscope", userWithHoroscope);
 
             var userDetails = db.LoadRecords<UserDetails>("horoscope");
-            foreach(var user in userDetails)
+            foreach (var user in userDetails)
             {
                 Console.WriteLine($"Groom : {user?.GroomName} vs Bride: {user?.BrideName} and status of their horoscope: {user?.horoscope?.MatchStatus}.");
             }
+
+            // var userRec = db.LoadRecordById<UserDetails>("horoscope", new Guid("1cf60e95-20aa-40cf-a0b2-0722cd42884b"));
+            var userRec = db.LoadRecordById<UserDetails>("horoscope", new Guid("1cf60e95-20aa-40cf-a0b2-0722cd42884b"));
+            Console.WriteLine($"Horoscope status: {userRec?.horoscope?.MatchStatus} and reason: {userRec?.horoscope?.Reason}");
             Console.ReadKey();
         }
     }
