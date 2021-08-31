@@ -1,6 +1,15 @@
 # SampleMongoDB
 Sample application using C# with MongoDB
 
+### Comparision with SQL SERVER and MONGODB
+~~~
+Database == Database
+
+Table    == Collection
+
+Row      == Document
+~~~
+
 ### You can find a generic way how we can write
 1. Insert
 2. Update
