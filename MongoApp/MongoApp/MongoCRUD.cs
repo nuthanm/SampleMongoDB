@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Collections.Generic;
 
 namespace MongoApp
 {
@@ -18,6 +20,19 @@ namespace MongoApp
         {
             var collection = _db.GetCollection<T>(table);
             collection.InsertOne(record);
+        }
+
+        /// <summary>
+        /// To fetch all the records from the table/collections.
+        /// Its good when you have a smaller number of records/documents.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public List<T> LoadRecords<T>(string table)
+        {
+            var collection = _db.GetCollection<T>(table);
+            return collection.Find(new BsonDocument()).ToList();
         }
     }
 }
